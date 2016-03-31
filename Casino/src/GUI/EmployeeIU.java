@@ -43,8 +43,8 @@ public class EmployeeIU extends javax.swing.JFrame {
         JacquiDate.setVisible(true);
 
         this.newInterface();
-        this.setDataFile(new DBCasino());
-        this.selectMachine();
+//        this.setDataFile(new DBCasino());
+//        this.selectMachine();
 
     }
 
