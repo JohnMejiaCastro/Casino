@@ -41,7 +41,8 @@ public class AddDeletedUsers extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setTitle("USERS");
         labPath.setVisible(false);
-        this.setDataFile(new DBCasino());
+        this.dataFile = new DBCasino();
+        this.dataFile.connectMSAcces("C:\\Users\\johnleandro\\Documents\\NetBeansProjects\\14-03-16--1,58amCasino DB\\src\\Casino\\persistence\\CasinoDB.accdb");
         this.selectUser();
     }
 

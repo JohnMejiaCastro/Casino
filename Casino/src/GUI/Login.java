@@ -248,18 +248,33 @@ public class Login extends javax.swing.JFrame {
 //        } else {
 //        Users();
 //        }
+if (this.isPassword(txtUser.getText(), new String(txtPassword.getPassword()))) {
+      
+            try {
+                int level = this.getDataFile().getResultSet().getInt("userType");
+                MenuManager mdiForm = new MenuManager(this.getDataFile(),level);
+                if (level == 0){
+                    MenuManager form = new MenuManager();
+                    form.setVisible(true);
+                    dispose();
+                }else {
+                    if (level == 1 ){
+                        EmployeeIU form = new EmployeeIU();
+                        form.setVisible(true);
+                        dispose();
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(this,
+                    "Sorry, Username and password do not match!", "Login",
+                    JOptionPane.ERROR_MESSAGE);
 
 
-if (this.isPassword(txtUser.getText(), new String(txtPassword.getPassword()))){
-    try {
-        MenuManager mdiForm = new MenuManager(this.getDataFile(),
-                this.getDataFile().getResultSet().getInt("userType"));
-        mdiForm.setVisible(true);
-    } catch (SQLException ex) {
-        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-    }
-
-}
+        }
 
     }//GEN-LAST:event_butLoginActionPerformed
 
@@ -381,5 +396,4 @@ if (this.isPassword(txtUser.getText(), new String(txtPassword.getPassword()))){
         }
         return correct;
     }
-
 }

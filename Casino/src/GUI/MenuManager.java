@@ -5,12 +5,17 @@
  */
 package GUI;
 
+import Casino.persistence.DBCasino;
+import javax.swing.JFrame;
+
 /**
  *
  * @author Usuario
  */
 public class MenuManager extends javax.swing.JFrame {
 
+    private DBCasino dataFile;
+     private int userLevel;
     /**
      * Creates new form MenuManager
      */
@@ -20,6 +25,32 @@ public class MenuManager extends javax.swing.JFrame {
         this.setTitle("Menú");
     }
 
+    MenuManager(DBCasino dataFile, int userLevel) {
+          
+        initComponents();           
+        this.dataFile = dataFile;
+        this.userLevel = userLevel;
+        
+              
+    }
+
+    public DBCasino getDataFile() {
+        return dataFile;
+    }
+
+    public void setDataFile(DBCasino dataFile) {
+        this.dataFile = dataFile;
+    }
+
+    public int getUserLevel() {
+        return userLevel;
+    }
+
+    public void setUserLevel(int userLevel) {
+        this.userLevel = userLevel;
+    }
+
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
