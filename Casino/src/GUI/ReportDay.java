@@ -306,7 +306,7 @@ public class ReportDay extends javax.swing.JFrame {
             long yesterdayOutCounter = 0;
 
             for (DataDayReport report : reportList) {
-                if (machine.getNumberMachine() == Integer.parseInt(report.getNumberMachine())) {
+                if (machine.getNumberMachine() == report.getNumberMachine()) {
                     if (report.getDayDate().equals(datDayReport.getDate())) {
                         todayInCounter = report.getMachineInputDayCurrent();
                         todayOutCounter = report.getMachineOutDayCurrent();

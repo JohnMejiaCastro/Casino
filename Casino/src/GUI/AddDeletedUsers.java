@@ -7,6 +7,7 @@ package GUI;
 
 import Casino.persistence.DBCasino;
 import Casino.persistence.XMLUsers;
+import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -17,6 +18,7 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import logic.PDFReport;
 
 import logic.Users;
 
@@ -76,6 +78,7 @@ public class AddDeletedUsers extends javax.swing.JFrame {
         butUpdate = new javax.swing.JButton();
         butDelete = new javax.swing.JButton();
         butBack = new javax.swing.JButton();
+        butReport = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -269,13 +272,23 @@ public class AddDeletedUsers extends javax.swing.JFrame {
             }
         });
 
+        butReport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pictures/clipboard-charts-32.png"))); // NOI18N
+        butReport.setText("Report");
+        butReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butReportActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(148, 148, 148)
+                .addGap(57, 57, 57)
                 .addComponent(butBack, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(71, 71, 71)
+                .addComponent(butReport)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -292,7 +305,9 @@ public class AddDeletedUsers extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panAddUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(butBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(butBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(butReport))
                 .addContainerGap())
         );
 
@@ -389,6 +404,32 @@ public class AddDeletedUsers extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_butDeleteActionPerformed
 
+    private void butReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butReportActionPerformed
+        String[] fields = {"User c.c", "user type"};
+        String[] dbFields = {"userCC", "userType"};
+
+        PDFReport report = new PDFReport(
+            "userReport.pdf",
+            "JF",
+            "BillApp",
+            "Users Report",
+            "Casino POKERLAND",
+            fields,
+            dbFields,
+            this.getDataFile().getResultSet());
+        
+
+        try {
+            report.generatePDF();
+            File path = new File("userReport.pdf");
+            Desktop.getDesktop().open(path);
+        } catch (IOException ex) {
+            Logger.getLogger(AddDeletedUsers.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(AddDeletedUsers.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_butReportActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -436,6 +477,7 @@ public class AddDeletedUsers extends javax.swing.JFrame {
     private javax.swing.JButton butNew;
     private javax.swing.JButton butNext;
     private javax.swing.JButton butPrevious;
+    private javax.swing.JButton butReport;
     private javax.swing.JButton butUpdate;
     private javax.swing.JLabel labPasswordUser;
     private javax.swing.JLabel labPath;

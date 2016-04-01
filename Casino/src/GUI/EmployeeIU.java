@@ -13,9 +13,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.transform.Result;
+import logic.Users;
 
 /**
  *
@@ -24,6 +27,7 @@ import javax.xml.transform.Result;
 public class EmployeeIU extends javax.swing.JFrame {
 
     private DBCasino dataFile;
+    private int[] machineIndexes;
 
     public DBCasino getDataFile() {
         return dataFile;
@@ -33,6 +37,23 @@ public class EmployeeIU extends javax.swing.JFrame {
         this.dataFile = dataFile;
     }
 
+    public int[] getMachineIndexes() {
+        return machineIndexes;
+    }
+
+    public void setMachineIndexes(int[] machineIndexes) {
+        this.machineIndexes = machineIndexes;
+    }
+    
+    public long getMachineIndexes(int index) {
+        return this.machineIndexes[index];
+    }
+    
+    public void setMachineIndexes(int index, int value){
+        this.machineIndexes[index] = value;
+    }
+    
+
     /**
      * Creates new form EmployeeIU
      */
@@ -40,11 +61,29 @@ public class EmployeeIU extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setTitle("EMPLOYEE");
+        this.dataFile = new DBCasino();
+        this.dataFile.connectMSAcces("C:\\Users\\johnleandro\\Documents\\NetBeansProjects\\14-03-16--1,58amCasino DB\\src\\Casino\\persistence\\CasinoDB.accdb");
         JacquiDate.setVisible(true);
-
+        loadMachineCombo();
+        selectMachine();
+        
         this.newInterface();
-//        this.setDataFile(new DBCasino());
-//        this.selectMachine();
+       
+    }
+
+    public EmployeeIU(DBCasino dataFile) {
+
+//        initComponents();
+//        this.setLocationRelativeTo(null);
+//        this.setTitle("EMPLOYEE");
+//        this.dataFile = new DBCasino();
+//        this.dataFile.connectMSAcces("C:\\Users\\johnleandro\\Documents\\NetBeansProjects\\14-03-16--1,58amCasino DB\\src\\Casino\\persistence\\CasinoDB.accdb");
+//        JacquiDate.setVisible(true);
+//        loadMachineCombo();
+//        selectMachine();
+//        
+//        this.newInterface();
+        
 
     }
 
@@ -221,16 +260,23 @@ public class EmployeeIU extends javax.swing.JFrame {
     }//GEN-LAST:event_butLogOutActionPerformed
 
     private void butNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butNewActionPerformed
-        if (butNew.getText().equalsIgnoreCase("New")) {
-            this.newInterface();
+         if (butNew.getText().equals("New")) {
+            this.newView();
         } else {
-            this.saveInterface();
+            if (butNew.getText().equals("Save")) {
+                if (this.validateView()) {
+                    this.insertReportDay();
+                    butNew.setText("New");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Please, fill the requeried fields",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
         }
     }//GEN-LAST:event_butNewActionPerformed
 
     private void jcbNumberMachineMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcbNumberMachineMouseClicked
-        // TODO add your handling code here:
-
+      
     }//GEN-LAST:event_jcbNumberMachineMouseClicked
 
     /**
@@ -299,54 +345,193 @@ public class EmployeeIU extends javax.swing.JFrame {
     /**
      * You Save the Dta of Interface
      *
+     * @return 
      */
-    private void saveInterface() {
-        if (jcbNumberMachine.getSelectedItem().equals(" ")
-                || txtInput.getText().equals("")
-                || txtOut.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Please, fill the requiered fields",
-                    "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
-            DataDayReport dateReport = interface2Object();
-
-        }
-    }
+   
 
     /**
      * You obtain data from the interface and passes it to an object
      *
      * @return DataDayReport dateReport
      */
-    private DataDayReport interface2Object() {
-        DataDayReport dateReport = new DataDayReport();
+    private void object2View() {
+        Timestamp timeStamp;
+        DataDayReport rep = new DataDayReport();
 
-        dateReport.setNumberMachine("" + jcbNumberMachine.getSelectedItem());
-        dateReport.setMachineInputDayCurrent(Integer.parseInt(txtInput.getText()));
-        dateReport.setMachineOutDayCurrent(Integer.parseInt(txtOut.getText()));
-        dateReport.setDayDate(JacquiDate.getDate());
-
-        return dateReport;
+        try {
+            rep.setNumberMachine(this.getDataFile().getResultSet().getInt(1));
+            
+            timeStamp = this.getDataFile().getResultSet().getTimestamp("dayDate");
+            rep.setDayDate((timeStamp == null)? null : new Date(timeStamp.getTime()));
+            rep.setMachineInputDayCurrent(this.getDataFile().getResultSet().getLong(3));
+            rep.setMachineOutDayCurrent(this.getDataFile().getResultSet().getLong(4));
+            this.object2View(rep);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeeIU.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
+    
+    private DataDayReport view2Object(){
+        
+        DataDayReport rep = new DataDayReport();
+
+        rep.setNumberMachine(Integer.parseInt(txtInput.getText()));
+        rep.setDayDate(JacquiDate.getDate());
+        rep.setMachineInputDayCurrent(Long.parseLong(txtInput.getText()));
+        rep.setMachineOutDayCurrent(Long.parseLong(txtOut.getText()));
+        
+        return rep;
+    }
+    
+    private void object2View(DataDayReport rep) {
+         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+
+        jcbNumberMachine.setSelectedIndex(this.searchMahineIndex(rep.getNumberMachine()));
+
+        txtInput.setText("" + rep.getMachineInputDayCurrent());
+        txtOut.setText("" + rep.getMachineOutDayCurrent());
+        dateFormat.format(rep.getDayDate());
+        JacquiDate.setDate(rep.getDayDate());
+
+    }
+    
+     
     /**
      * You obtain the Number Machine in Jcombobox
      *
      */
-    private void selectMachine() {
-         
-        String query = "SELECT * FROM machine";
-        
+    
+     private void newView() {
+        jcbNumberMachine.setSelectedIndex(1);
+        txtInput.setText("");
+        txtOut.setText("");
+
+        butNew.setText("Save");
+    }
+    
+       private boolean validateView() {
+
+        boolean validate = !(jcbNumberMachine.getSelectedItem().equals("")
+                || txtInput.getText().equals("")
+                || txtOut.getText().equals("")
+                || (JacquiDate.getDate() == null));
+        return validate;
+    }
+
+    
+    private void selectReport() {
+        String query = "SELECT * FROM dateDayReport";
         if (this.getDataFile().execute(query)) {
-       
-        try {
-                while (this.getDataFile().getResultSet().next()) {
-                    jcbNumberMachine.addItem(dataFile.getResultSet().getInt("numberMachine"));
-                }
-            
-            }catch (SQLException ex) {
-             Logger.getLogger(EmployeeIU.class.getName()).log(Level.SEVERE, null, ex);
-         }
+            try {
+                this.getDataFile().getResultSet().next();
+                this.updateView();
+            } catch (SQLException ex) {
+                Logger.getLogger(EmployeeIU.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    private void selectMachine() {
+ String query = "SELECT * FROM machine";
+        if (this.getDataFile().execute(query)) {
+            try {
+                this.getDataFile().getResultSet().next();
+                this.updateView();
+            } catch (SQLException ex) {
+                Logger.getLogger(EmployeeIU.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    private void loadMachineCombo() {
+        jcbNumberMachine.removeAllItems();
+        this.setMachineIndexes(new int[this.selectCountMachine()]);
         
+        String query = "SELECT numberMachine FROM machine";
+        if(this.getDataFile().execute(query)){
+            
+            try {
+                int index =0;
+                while(this.getDataFile().getResultSet().next()){
+                    this.setMachineIndexes(index++, this.getDataFile().getResultSet().getInt("numberMachine"));
+                    jcbNumberMachine.addItem(
+                    this.getDataFile().getResultSet().getInt("numberMachine"));
+                    
+                    
+                }
+                    } catch (SQLException ex) {
+                Logger.getLogger(EmployeeIU.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    private int selectCountMachine() {
+        int count = 0;
+        String query = "SELECT count(*) FROM machine";
+        if (this.getDataFile().execute(query)){
+            try {
+                this.getDataFile().getResultSet().next();
+                count = this.getDataFile().getResultSet().getInt(1);
+            } catch (SQLException ex) {
+                Logger.getLogger(EmployeeIU.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return count;
+    }
+
+//    private void updateView() {
+//        
+//    }
+ 
+ 
+   
+    
+     private void updateView() {
+        if ((this.getDataFile().getResultSet() == null)
+                || (this.selectCountMachine() <= 0)) {
+            this.newView();
+        } else {
+            this.object2View();
+        }
+    }
+    private void selectReportDay() {
+         String query = "SELECT * FROM dateReportDay";
+        if (this.getDataFile().execute(query)) {
+            try {
+                this.getDataFile().getResultSet().next();
+                this.updateView();
+            } catch (SQLException ex) {
+                Logger.getLogger(EmployeeIU.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    private int searchMahineIndex(int numberMachine) {
+       int index = 0;
+        for (int i = 0; i < this.getMachineIndexes().length; i++) {
+            if (numberMachine == this.getMachineIndexes(i)) {
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
+
+    private void insertReportDay() {
+        DataDayReport rep = this.view2Object();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        String query = "INSERT INTO dateDayReport"
+                + "(numberMachine, dayDate, machineInputDayCurrent, machineOutDayCurrent) "
+                + "VALUES ("
+                + rep.getNumberMachine() + ","
+                + dateFormat.format(rep.getDayDate()) + ",'"
+                + rep.getMachineInputDayCurrent() + "' "
+                + rep.getMachineOutDayCurrent()+ ")";
+        if (this.getDataFile().execute(query)) {
+            this.selectMachine();
+            
         }
     }
 

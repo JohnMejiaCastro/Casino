@@ -18,7 +18,7 @@ public class DataDayReport {
      * Date Report day
      */
 //    private Date dayDate2;  /** Date Report day */ 
-    private String numberMachine;
+    private int numberMachine;
     /**
      * Number Machine
      */
@@ -43,7 +43,7 @@ public class DataDayReport {
      */
     public DataDayReport() {
         this.dayDate = new Date();
-        this.numberMachine = "";
+        this.numberMachine = 0;
         this.machineInputDayCurrent = 0;
         this.machineOutDayCurrent = 0;
     }
@@ -56,7 +56,7 @@ public class DataDayReport {
      * @param machineInputDayCurrent Current Input Day
      * @param machineOutDayCurrent Current Output day
      */
-    public DataDayReport(Date dayDate2, int resultDay, Date dayDate, String numberMachine, long availableMoney, long expensesEmployee, long machineInputDayCurrent, long machineOutDayCurrent) {
+    public DataDayReport(Date dayDate2, int resultDay, Date dayDate, int numberMachine, long availableMoney, long expensesEmployee, long machineInputDayCurrent, long machineOutDayCurrent) {
         this.dayDate = dayDate;
         this.numberMachine = numberMachine;     
         this.machineInputDayCurrent = machineInputDayCurrent;
@@ -88,7 +88,7 @@ public class DataDayReport {
      * Get Number Machine
      * @return Number Machine
      */
-    public String getNumberMachine() {
+    public int getNumberMachine() {
         return numberMachine;
     }
 
@@ -96,7 +96,7 @@ public class DataDayReport {
      * Change Number Machine
      * @param numberMachine 
      */
-    public void setNumberMachine(String numberMachine) {
+    public void setNumberMachine(int numberMachine) {
         this.numberMachine = numberMachine;
     }
 

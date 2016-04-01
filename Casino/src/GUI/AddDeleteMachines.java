@@ -9,6 +9,9 @@ package GUI;
 
 
 import Casino.persistence.DBCasino;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,6 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import logic.Machine;
+import logic.PDFReport;
 
 /**
  *
@@ -41,7 +45,8 @@ public class AddDeleteMachines extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setTitle("Maquinas");
-        this.setDataFile(new DBCasino());
+        this.dataFile = new DBCasino();
+        this.dataFile.connectMSAcces("C:\\Users\\johnleandro\\Documents\\NetBeansProjects\\14-03-16--1,58amCasino DB\\src\\Casino\\persistence\\CasinoDB.accdb");
         this.selectMachine();
     }
 
@@ -437,7 +442,30 @@ public class AddDeleteMachines extends javax.swing.JFrame {
     }//GEN-LAST:event_butFirstActionPerformed
 
     private void butReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butReportActionPerformed
-//        // TODO add your handling code here:
+        
+        String[] fields = {"Number Machine", "Machine Type", "Counters In", "Counters Out", "Acquisition Date", "Bet Value"};
+        String[] dbFields = {"numberMachine", "machineType", "accountantIn", "accountantOut", "dayAcquisicion", "BetValue"};
+
+        PDFReport report = new PDFReport(
+            "machineReport.pdf",
+            "BATS DEVELOPERS",
+            "Casino",
+            "Machine Report",
+            "Casino POKERLAND",
+            fields,
+            dbFields,
+            this.getDataFile().getResultSet());
+        
+
+        try {
+            report.generatePDF();
+            File path = new File("machineReport.pdf");
+            Desktop.getDesktop().open(path);
+        } catch (IOException ex) {
+            Logger.getLogger(AddDeleteMachines.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(AddDeletedUsers.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_butReportActionPerformed
 
     
