@@ -6,6 +6,7 @@
 package GUI;
 
 import Casino.persistence.DBCasino;
+import com.itextpdf.text.Paragraph;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
@@ -503,6 +504,7 @@ public class AddDeleteMachines extends javax.swing.JFrame {
 
         try {
             report.generatePDF();
+            
             File path = new File("machineReport.pdf");
             Desktop.getDesktop().open(path);
         } catch (IOException ex) {

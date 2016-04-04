@@ -122,7 +122,7 @@ public class Reports extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        panReportMonth.setBorder(javax.swing.BorderFactory.createTitledBorder("Report Month"));
+        panReportMonth.setBorder(javax.swing.BorderFactory.createTitledBorder("Report  by date"));
 
         butSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pictures/search.png"))); // NOI18N
         butSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -139,10 +139,10 @@ public class Reports extends javax.swing.JFrame {
                 .addGap(4, 4, 4)
                 .addComponent(jDateLast, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jDateBefore, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jDateBefore, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(butSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panReportMonthLayout.setVerticalGroup(
             panReportMonthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

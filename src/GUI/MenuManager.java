@@ -238,7 +238,7 @@ public class MenuManager extends javax.swing.JFrame {
 
     private void butInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butInfoActionPerformed
        
-        JOptionPane.showMessageDialog(null, "App For Casinos");
+        JOptionPane.showMessageDialog(null, "App For Casinos" + " \n" + "AUTHOR APLICATION: Bats Developers" + " \n" + "Version 1.0");
         
     }//GEN-LAST:event_butInfoActionPerformed
 

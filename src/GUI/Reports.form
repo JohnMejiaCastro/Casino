@@ -120,7 +120,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="Report Month"/>
+            <TitledBorder title="Report  by date"/>
           </Border>
         </Property>
       </Properties>
@@ -132,10 +132,10 @@
                   <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                   <Component id="jDateLast" min="-2" pref="133" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jDateBefore" min="-2" pref="107" max="-2" attributes="0"/>
+                  <Component id="jDateBefore" min="-2" pref="130" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="butSearch" min="-2" pref="44" max="-2" attributes="0"/>
-                  <EmptySpace pref="19" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

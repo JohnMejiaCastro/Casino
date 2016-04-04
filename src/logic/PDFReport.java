@@ -176,8 +176,104 @@ public class PDFReport {
                 }
             }
 
-            doc.add(table);
+             header = new Paragraph(" ");
+             header = new Paragraph(" ");
+             header = new Paragraph(" ");
+             doc.add(header);
+            doc.add(table);                  
+             
+             header = new Paragraph(" ");
+            header = new Paragraph("MACHINE TYPE: (0) IT REPRESENTS MACHINE MULTIPURPOSE",
+            FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD));
+            header.setAlignment(Element.ALIGN_LEFT);
+            doc.add(header);
+            header = new Paragraph(" ");
+            header = new Paragraph("MACHINE TYPE: (1) IT REPRESENTS MACHINE POKER",
+            FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD));
+            header.setAlignment(Element.ALIGN_LEFT);
+            doc.add(header);
             doc.close();
+            
+        } catch (DocumentException | FileNotFoundException ex) {
+             Logger.getLogger(AddDeletedUsers.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(PDFReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
+    public void generatePDFUsers() throws SQLException{
+        Font bfBold12 = new Font (Font.FontFamily.HELVETICA, 8, Font.BOLD, BaseColor.WHITE);
+        Font b12 = new Font(Font.FontFamily.HELVETICA,  8);
+        int columns = this.getFields().length;
+        Paragraph header;
+        
+        try {
+            Document doc  =  new Document();
+            PdfWriter.getInstance(doc, new FileOutputStream(this.getPdfFilename()));
+            
+            doc.addAuthor(this.getAuthor());
+            doc.addCreationDate();
+            doc.addProducer();
+            doc.addCreator(this.getAppName());
+            doc.addTitle(this.getTitle());
+            doc.setPageSize(PageSize.LETTER);
+            
+            doc.open();
+            
+            header = new Paragraph(new Date().toString(),
+                    FontFactory.getFont(FontFactory.COURIER, 8, Font.NORMAL));
+            header.setAlignment(Element.ALIGN_RIGHT);
+            doc.add(header);
+            header = new Paragraph(this.getCompanyName(),
+                    FontFactory.getFont(FontFactory.HELVETICA, 18, Font.BOLD));
+            header.setAlignment(Element.ALIGN_RIGHT);            
+            doc.add(header);
+            header = new Paragraph(this.getTitle(),
+                    FontFactory.getFont(FontFactory.HELVETICA, 18, Font.BOLD));
+            header.setAlignment(Element.ALIGN_CENTER);
+            doc.add(header);
+            
+            header= new Paragraph ("");
+            doc.add(header);
+            
+            PdfPTable table = new PdfPTable(columns);
+            table.setWidthPercentage(75f);
+            
+            for (String field : this.getFields()) {
+                this.insertPDFCell(table, field, Element.ALIGN_CENTER, 1, bfBold12, BaseColor.BLACK);
+            }
+            table.setHeaderRows(1);
+
+            if (this.getResultSet() != null) {
+                this.getResultSet().beforeFirst();
+                while (this.getResultSet().next()) {
+                    for (String dbField : this.getDbFields()) {
+                        String value = (this.getResultSet().getString(dbField) == null)
+                                ? "" : this.getResultSet().getString(dbField);
+                        this.insertPDFCell(table, value, Element.ALIGN_CENTER, 1, b12, BaseColor.WHITE);
+                    }
+                }
+            }
+
+             header = new Paragraph(" ");
+             header = new Paragraph(" ");
+             header = new Paragraph(" ");
+             doc.add(header);
+            doc.add(table);                  
+             
+             header = new Paragraph(" ");
+            header = new Paragraph("USER TYPE: (0) IT REPRESENTS THE ADMINISTRATOR",
+            FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD));
+            header.setAlignment(Element.ALIGN_LEFT);
+            doc.add(header);
+            header = new Paragraph(" ");
+            header = new Paragraph("USER TYPE: (1) IT REPRESENTS THE EMPLOYEE",
+            FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD));
+            header.setAlignment(Element.ALIGN_LEFT);
+            doc.add(header);
+            doc.close();
+            
         } catch (DocumentException | FileNotFoundException ex) {
              Logger.getLogger(AddDeletedUsers.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {

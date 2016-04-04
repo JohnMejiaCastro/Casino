@@ -439,7 +439,7 @@ public class AddDeletedUsers extends javax.swing.JFrame {
                 this.getDataFile().getResultSet());
 
         try {
-            report.generatePDF();
+            report.generatePDFUsers();
             File path = new File("userReport.pdf");
             Desktop.getDesktop().open(path);
         } catch (IOException ex) {
