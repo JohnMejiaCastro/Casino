@@ -90,7 +90,7 @@ public class Reports extends javax.swing.JFrame {
         jDateBefore = new com.toedter.calendar.JDateChooser();
         jDateLast = new com.toedter.calendar.JDateChooser();
         butBack = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        panReportDay = new javax.swing.JPanel();
         jDateDay = new com.toedter.calendar.JDateChooser();
         butSearch1 = new javax.swing.JButton();
 
@@ -164,7 +164,7 @@ public class Reports extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Report Day"));
+        panReportDay.setBorder(javax.swing.BorderFactory.createTitledBorder("Report Day"));
 
         butSearch1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pictures/search.png"))); // NOI18N
         butSearch1.addActionListener(new java.awt.event.ActionListener() {
@@ -173,21 +173,21 @@ public class Reports extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout panReportDayLayout = new javax.swing.GroupLayout(panReportDay);
+        panReportDay.setLayout(panReportDayLayout);
+        panReportDayLayout.setHorizontalGroup(
+            panReportDayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panReportDayLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jDateDay, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addComponent(butSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(73, 73, 73))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        panReportDayLayout.setVerticalGroup(
+            panReportDayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panReportDayLayout.createSequentialGroup()
+                .addGroup(panReportDayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(butSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jDateDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 8, Short.MAX_VALUE))
@@ -211,7 +211,7 @@ public class Reports extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(panReportDay, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(panReportMonth, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
@@ -221,7 +221,7 @@ public class Reports extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(panDataUsers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panReportDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panReportMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19)
@@ -293,10 +293,10 @@ public class Reports extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser jDateBefore;
     private com.toedter.calendar.JDateChooser jDateDay;
     private com.toedter.calendar.JDateChooser jDateLast;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labPhoto;
     private javax.swing.JLabel labPokerland;
     private javax.swing.JPanel panDataUsers;
+    private javax.swing.JPanel panReportDay;
     private javax.swing.JPanel panReportMonth;
     // End of variables declaration//GEN-END:variables
 

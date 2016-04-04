@@ -60,7 +60,7 @@ public class EmployeeIU extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setTitle("EMPLOYEE");
-        JacquiDate.setVisible(true);
+        JacquiDate.setVisible(false);
         loadMachineCombo();
         selectMachine();
         this.newInterface();
@@ -73,7 +73,7 @@ public class EmployeeIU extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setTitle("EMPLOYEE");
         this.dataFile = dataFile;
-        JacquiDate.setVisible(true);
+        JacquiDate.setVisible(false);
         loadMachineCombo();
         selectMachine();
 

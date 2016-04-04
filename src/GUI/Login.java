@@ -59,8 +59,8 @@ public class Login extends javax.swing.JFrame {
         labUser = new javax.swing.JLabel();
         labPassword = new javax.swing.JLabel();
         butLogin = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        labImage = new javax.swing.JLabel();
+        butViewPass = new javax.swing.JToggleButton();
         butForgetPassword = new javax.swing.JButton();
         txtUser = new javax.swing.JTextField();
         txtViewPassword = new javax.swing.JTextField();
@@ -90,12 +90,12 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pictures/casinoLogo.PNG"))); // NOI18N
+        labImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pictures/casinoLogo.PNG"))); // NOI18N
 
-        jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pictures/viewPassword.png"))); // NOI18N
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        butViewPass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pictures/viewPassword.png"))); // NOI18N
+        butViewPass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                butViewPassActionPerformed(evt);
             }
         });
 
@@ -146,10 +146,9 @@ public class Login extends javax.swing.JFrame {
                             .addGroup(panLoginLayout.createSequentialGroup()
                                 .addGroup(panLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtViewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(butForgetPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtViewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(butViewPass, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(panLoginLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(labUser))
@@ -158,14 +157,17 @@ public class Login extends javax.swing.JFrame {
                         .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panLoginLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(labImage, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panLoginLayout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(butForgetPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panLoginLayout.setVerticalGroup(
             panLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panLoginLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(jLabel1)
+                .addComponent(labImage)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labUser)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -177,7 +179,7 @@ public class Login extends javax.swing.JFrame {
                     .addGroup(panLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
                         .addComponent(txtViewPassword)
                         .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(butViewPass, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(butLogin)
                 .addGap(18, 18, 18)
@@ -221,9 +223,9 @@ public class Login extends javax.swing.JFrame {
             show = true;
         }
     }
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+    private void butViewPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butViewPassActionPerformed
         viewPass();
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
+    }//GEN-LAST:event_butViewPassActionPerformed
 
     private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserActionPerformed
         // TODO add your handling code here:
@@ -263,8 +265,8 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_butLoginActionPerformed
 
     private void butForgetPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butForgetPasswordActionPerformed
-        JOptionPane.showMessageDialog(this, "Please contact the administrator", "Warning",
-                JOptionPane.INFORMATION_MESSAGE);
+        Forgot forgotFrom = new Forgot(this.getDataFile());
+        forgotFrom.setVisible(true);
     }//GEN-LAST:event_butForgetPasswordActionPerformed
 
     /**
@@ -306,8 +308,8 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton butForgetPassword;
     private javax.swing.JButton butLogin;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JToggleButton butViewPass;
+    private javax.swing.JLabel labImage;
     private javax.swing.JLabel labPassword;
     private javax.swing.JLabel labUser;
     private javax.swing.JPanel panLogin;
@@ -319,18 +321,8 @@ public class Login extends javax.swing.JFrame {
     /**
      * You get the Users
      */
-    public void Users() throws SQLException {
-
-//        if ((this.txtViewPassword.getText().equalsIgnoreCase("13579zk")
-//                && this.txtUser.getText().equalsIgnoreCase("1049645412"))
-//                || (this.txtPassword.getText().equalsIgnoreCase("13579zk")
-//                && this.txtUser.getText().equalsIgnoreCase("1049645412"))) {
-//            MenuManager Wconnect = new MenuManager();
-//            Wconnect.setVisible(true);
-//            dispose();
-//        } else {
-//            
-//        }
+    public void Users(){
+        
     }
 
     private void selectUser() {

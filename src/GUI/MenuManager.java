@@ -7,6 +7,7 @@ package GUI;
 
 import Casino.persistence.DBCasino;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,6 +17,7 @@ public class MenuManager extends javax.swing.JFrame {
 
     private DBCasino dataFile;
      private int userLevel;
+     
     /**
      * Creates new form MenuManager
      */
@@ -23,10 +25,16 @@ public class MenuManager extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setTitle("Menú");
+        butInfo.setOpaque(false);
+        butInfo.setContentAreaFilled(false);
+        butInfo.setBorderPainted(false);
     }
 
     MenuManager(DBCasino dataFile) {
         initComponents();
+        butInfo.setOpaque(false);
+        butInfo.setContentAreaFilled(false);
+        butInfo.setBorderPainted(false);
         this.setLocationRelativeTo(null);
         this.setTitle("Menú");
         this.dataFile = dataFile;
@@ -62,6 +70,7 @@ public class MenuManager extends javax.swing.JFrame {
         butMonthlyReport = new javax.swing.JButton();
         butMachines = new javax.swing.JButton();
         butUsers = new javax.swing.JButton();
+        butInfo = new javax.swing.JButton();
         panDataUsers = new javax.swing.JPanel();
         labPhoto = new javax.swing.JLabel();
         labPokerland = new javax.swing.JLabel();
@@ -98,28 +107,43 @@ public class MenuManager extends javax.swing.JFrame {
             }
         });
 
+        butInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pictures/info-16.png"))); // NOI18N
+        butInfo.setText("About App ");
+        butInfo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        butInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butInfoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panMenuAdiministradorLayout = new javax.swing.GroupLayout(panMenuAdiministrador);
         panMenuAdiministrador.setLayout(panMenuAdiministradorLayout);
         panMenuAdiministradorLayout.setHorizontalGroup(
             panMenuAdiministradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panMenuAdiministradorLayout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addGroup(panMenuAdiministradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(butMonthlyReport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(butMachines, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(butUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panMenuAdiministradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panMenuAdiministradorLayout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addGroup(panMenuAdiministradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(butMonthlyReport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(butMachines, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(butUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(panMenuAdiministradorLayout.createSequentialGroup()
+                        .addGap(138, 138, 138)
+                        .addComponent(butInfo)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panMenuAdiministradorLayout.setVerticalGroup(
             panMenuAdiministradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panMenuAdiministradorLayout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(butMonthlyReport)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(butMachines, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(butMachines, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(butUsers)
-                .addGap(26, 26, 26))
+                .addComponent(butUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(3, 3, 3)
+                .addComponent(butInfo))
         );
 
         panDataUsers.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -212,6 +236,12 @@ public class MenuManager extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_butUsersActionPerformed
 
+    private void butInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butInfoActionPerformed
+       
+        JOptionPane.showMessageDialog(null, "App For Casinos");
+        
+    }//GEN-LAST:event_butInfoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -248,6 +278,7 @@ public class MenuManager extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton butInfo;
     private javax.swing.JButton butLogOut;
     private javax.swing.JButton butMachines;
     private javax.swing.JButton butMonthlyReport;

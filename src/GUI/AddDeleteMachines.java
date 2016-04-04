@@ -5,9 +5,6 @@
  */
 package GUI;
 
-
-
-
 import Casino.persistence.DBCasino;
 import java.awt.Desktop;
 import java.io.File;
@@ -28,26 +25,40 @@ import logic.PDFReport;
 public class AddDeleteMachines extends javax.swing.JFrame {
 
     /**
-     * Creates new form AddDeleteMachines
+     * Data Base DBCasino
      */
     private DBCasino dataFile;
-   
+
+    /**
+     *
+     * @return
+     */
     public DBCasino getDataFile() {
         return dataFile;
     }
 
+    /**
+     *
+     * @param dataFile
+     */
     public void setDataFile(DBCasino dataFile) {
         this.dataFile = dataFile;
     }
 
+    /**
+     *
+     */
     public AddDeleteMachines() {
-
         initComponents();
         this.setLocationRelativeTo(null);
         this.setTitle("Maquinas");
         this.selectMachine();
     }
 
+    /**
+     *
+     * @param dataFile
+     */
     public AddDeleteMachines(DBCasino dataFile) {
 
         initComponents();
@@ -56,6 +67,7 @@ public class AddDeleteMachines extends javax.swing.JFrame {
         this.dataFile = dataFile;
         this.selectMachine();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -78,7 +90,7 @@ public class AddDeleteMachines extends javax.swing.JFrame {
         txtOut = new javax.swing.JTextField();
         labIn = new javax.swing.JLabel();
         labOut = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        labDateAcquisition = new javax.swing.JLabel();
         JacquiDate = new com.toedter.calendar.JDateChooser();
         butDelete = new javax.swing.JButton();
         butUpdate = new javax.swing.JButton();
@@ -138,8 +150,8 @@ public class AddDeleteMachines extends javax.swing.JFrame {
         labOut.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         labOut.setText("OUT");
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setText("Acquisition Date");
+        labDateAcquisition.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        labDateAcquisition.setText("Acquisition Date");
 
         butDelete.setText("Delete");
         butDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -226,7 +238,7 @@ public class AddDeleteMachines extends javax.swing.JFrame {
                                         .addComponent(txtIn, javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(txtOut, javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(JacquiDate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE))))
-                            .addComponent(jLabel1))
+                            .addComponent(labDateAcquisition))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(panDetailsAddMachineLayout.createSequentialGroup()
                         .addComponent(butFirst)
@@ -271,7 +283,7 @@ public class AddDeleteMachines extends javax.swing.JFrame {
                     .addComponent(labOut))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panDetailsAddMachineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                    .addComponent(labDateAcquisition)
                     .addComponent(JacquiDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(panDetailsAddMachineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -363,13 +375,19 @@ public class AddDeleteMachines extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+     *
+     * @param evt
+     */
     private void butBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butBackActionPerformed
         MenuManager Wconnect = new MenuManager(this.getDataFile());
         Wconnect.setVisible(true);
         dispose();
     }//GEN-LAST:event_butBackActionPerformed
-
+    /**
+     *
+     * @param evt
+     */
     private void butDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butDeleteActionPerformed
         if (JOptionPane.showConfirmDialog(this, "are you to delete record ?",
                 "delete record", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
@@ -379,18 +397,24 @@ public class AddDeleteMachines extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_butDeleteActionPerformed
-
+    /**
+     * 
+     * @param evt 
+     */
     private void butUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butUpdateActionPerformed
-         this.updateMachine();
+        this.updateMachine();
         JOptionPane.showMessageDialog(this, "Updated record!", "Update record",
                 JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_butUpdateActionPerformed
-
+    /**
+     *
+     * @param evt
+     */
     private void butNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butNewActionPerformed
         if (butNew.getText().equalsIgnoreCase("New")) {
             this.newInterface();
-        } else if (butNew.getText().equalsIgnoreCase("save")){
-            if(validateView()){
+        } else if (butNew.getText().equalsIgnoreCase("save")) {
+            if (validateView()) {
                 this.insertMachine();
                 butNew.setText("New");
                 butFirst.setEnabled(true);
@@ -399,14 +423,17 @@ public class AddDeleteMachines extends javax.swing.JFrame {
                 butLast.setEnabled(true);
                 butUpdate.setEnabled(true);
                 butDelete.setEnabled(true);
-            }else{
-               JOptionPane.showMessageDialog(this, "Please, fill the requeried fields", 
-                        "Error", JOptionPane.ERROR_MESSAGE); 
+            } else {
+                JOptionPane.showMessageDialog(this, "Please, fill the requeried fields",
+                        "Error", JOptionPane.ERROR_MESSAGE);
             }
-            
+
         }
     }//GEN-LAST:event_butNewActionPerformed
-
+    /**
+     *
+     * @param evt
+     */
     private void butLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butLastActionPerformed
         try {
             this.getDataFile().getResultSet().last();
@@ -415,7 +442,10 @@ public class AddDeleteMachines extends javax.swing.JFrame {
             Logger.getLogger(AddDeleteMachines.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_butLastActionPerformed
-
+    /**
+     *
+     * @param evt
+     */
     private void butNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butNextActionPerformed
         try {
             if (!this.getDataFile().getResultSet().isLast()) {
@@ -426,7 +456,10 @@ public class AddDeleteMachines extends javax.swing.JFrame {
             Logger.getLogger(AddDeleteMachines.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_butNextActionPerformed
-
+    /**
+     *
+     * @param evt
+     */
     private void butPreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butPreviousActionPerformed
         try {
             if (!this.getDataFile().getResultSet().isFirst()) {
@@ -438,6 +471,10 @@ public class AddDeleteMachines extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_butPreviousActionPerformed
 
+    /**
+     *
+     * @param evt
+     */
     private void butFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butFirstActionPerformed
         try {
             this.getDataFile().getResultSet().first();
@@ -446,21 +483,23 @@ public class AddDeleteMachines extends javax.swing.JFrame {
             Logger.getLogger(AddDeleteMachines.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_butFirstActionPerformed
-
+    /**
+     *
+     * @param evt
+     */
     private void butReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butReportActionPerformed
         String[] fields = {"Number Machine", "Machine Type", "Counters In", "Counters Out", "Acquisition Date", "Bet Value"};
         String[] dbFields = {"numberMachine", "machineType", "accountantIn", "accountantOut", "dayAcquisicion", "BetValue"};
 
         PDFReport report = new PDFReport(
-            "machineReport.pdf",
-            "BATS DEVELOPERS",
-            "Casino",
-            "Machine Report",
-            "Casino POKERLAND",
-            fields,
-            dbFields,
-            this.getDataFile().getResultSet());
-        
+                "machineReport.pdf",
+                "BATS DEVELOPERS",
+                "Casino",
+                "Machine Report",
+                "Casino POKERLAND",
+                fields,
+                dbFields,
+                this.getDataFile().getResultSet());
 
         try {
             report.generatePDF();
@@ -473,8 +512,6 @@ public class AddDeleteMachines extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_butReportActionPerformed
 
-    
-  
     /**
      * @param args the command line arguments
      */
@@ -530,7 +567,7 @@ public class AddDeleteMachines extends javax.swing.JFrame {
     private javax.swing.JButton butReport;
     private javax.swing.JButton butUpdate;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel labDateAcquisition;
     private javax.swing.JLabel labIn;
     private javax.swing.JLabel labNumberMachine;
     private javax.swing.JLabel labNumberMachine1;
@@ -551,9 +588,9 @@ public class AddDeleteMachines extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     /**
-     * You prepare the interface to enter a new a item
+     *
      */
-   private void newInterface() {
+    private void newInterface() {
         txtNumberMachine.setText("");
         txtIn.setText("");
         txtOut.setText("");
@@ -561,16 +598,21 @@ public class AddDeleteMachines extends javax.swing.JFrame {
         JacquiDate.setDate(new Date());
         txtBetValue.setText("");
         butNew.setText("Save");
-        butFirst.setEnabled(false); 
+        butFirst.setEnabled(false);
         butPrevious.setEnabled(false);
         butNext.setEnabled(false);
         butLast.setEnabled(false);
         butDelete.setEnabled(false);
         butUpdate.setEnabled(false);
     }
+
+    /**
+     *
+     * @return
+     */
     private boolean validateView() {
         boolean validate = !(txtNumberMachine.getText().equals("")
-                || txtIn.getText().equals("") 
+                || txtIn.getText().equals("")
                 || txtOut.getText().equals("")
                 || (txtBetValue.getText().equals(""))
                 || (JacquiDate.getDate() == null));
@@ -578,7 +620,8 @@ public class AddDeleteMachines extends javax.swing.JFrame {
     }
 
     /**
-     * Obtain the view data and tranfer it to the object
+     *
+     * @return
      */
     private Machine view2Object() {
         Machine ma = new Machine();
@@ -589,32 +632,26 @@ public class AddDeleteMachines extends javax.swing.JFrame {
         ma.setAccountantOut(Long.parseLong(txtOut.getText()));
         ma.setDay(JacquiDate.getDate());
         ma.setBetValue(Long.parseLong(txtBetValue.getText()));
-        
+
         return ma;
     }
 
     /**
-     * You obtain data from an object and pass it to the view
+     *
      */
     private void updateView() {
         if (this.getDataFile().getResultSet() == null) {
             this.newInterface();
-        }
-        else {
+        } else {
             this.object2View();
         }
     }
 
     /**
-     * You prepare the view to enter a new employee data
-     */
- 
-
-    /**
-     * Result set -> object
+     *
      */
     private void object2View() {
-        Machine ma =new Machine();
+        Machine ma = new Machine();
         try {
             ma.setNumberMachine(this.getDataFile().getResultSet().getInt("numberMachine"));
             ma.setMachineType(this.getDataFile().getResultSet().getInt("machineType"));
@@ -629,21 +666,21 @@ public class AddDeleteMachines extends javax.swing.JFrame {
     }
 
     /**
-     * Show the object data into view
-     * @param employee Employee to show
+     *
+     * @param ma
      */
     private void object2View(Machine ma) {
         txtNumberMachine.setText("" + ma.getNumberMachine());
-        txtBetValue.setText(""+ma.getBetValue());
-        txtIn.setText(""+ma.getAccountantIn());
-        txtOut.setText(""+ma.getAccountantOut());        
+        txtBetValue.setText("" + ma.getBetValue());
+        txtIn.setText("" + ma.getAccountantIn());
+        txtOut.setText("" + ma.getAccountantOut());
         rbtMultijuego.setSelected(ma.getMachineType() == 0);
-        rbtPoker.setSelected(ma.getMachineType()==1);
+        rbtPoker.setSelected(ma.getMachineType() == 1);
         JacquiDate.setDate(ma.getDay());
     }
 
     /**
-     * Select employees from DB
+     *
      */
     private void selectMachine() {
         String query = "SELECT * FROM machine";
@@ -658,7 +695,7 @@ public class AddDeleteMachines extends javax.swing.JFrame {
     }
 
     /**
-     * Insert new ma
+     *
      */
     private void insertMachine() {
         Machine ma = this.view2Object();
@@ -667,10 +704,10 @@ public class AddDeleteMachines extends javax.swing.JFrame {
         String query = "INSERT INTO machine"
                 + "(numberMachine, machineType, accountantIn, accountantOut, dayAcquisicion, BetValue) "
                 + "VALUES ("
-                + ma.getNumberMachine()+ ","
-                + ma.getMachineType()+ ","
-                + ma.getAccountantIn()+ ","
-                + ma.getAccountantOut() + ", #"            
+                + ma.getNumberMachine() + ","
+                + ma.getMachineType() + ","
+                + ma.getAccountantIn() + ","
+                + ma.getAccountantOut() + ", #"
                 + dateFormat.format(ma.getDay()) + "#,"
                 + ma.getBetValue() + ")";
         if (this.getDataFile().execute(query)) {
@@ -680,16 +717,16 @@ public class AddDeleteMachines extends javax.swing.JFrame {
     }
 
     /**
-     * Update ma
+     *
      */
     private void updateMachine() {
         Machine ma = this.view2Object();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         String query = "UPDATE machine SET "
-                + "machineType = " + ma.getMachineType()+ ", "
+                + "machineType = " + ma.getMachineType() + ", "
                 + " accountantIn= " + ma.getAccountantIn() + ", "
-                + "accountantOut = " + ma.getAccountantOut()+ ", "
+                + "accountantOut = " + ma.getAccountantOut() + ", "
                 + "dayAcquisicion = #" + dateFormat.format(ma.getDay()) + "#, "
                 + "BetValue = " + ma.getBetValue() + " "
                 + "WHERE numberMachine = " + ma.getNumberMachine();
@@ -700,19 +737,19 @@ public class AddDeleteMachines extends javax.swing.JFrame {
     }
 
     /**
-     * Delete ma
+     *
      */
     private void deleteMachine() {
         Machine ma = this.view2Object();
         String query = "DELETE * FROM machine WHERE numberMachine = " + ma.getNumberMachine();
         if (this.getDataFile().execute(query)) {
             this.selectMachine();
-        }        
+        }
     }
 
     /**
-     * Search ma by id
-     * @param id Employee id
+     *
+     * @param numberMachine
      */
     private void searchMachine(int numberMachine) {
         boolean find = false;
@@ -728,8 +765,7 @@ public class AddDeleteMachines extends javax.swing.JFrame {
                 }
                 if (find) {
                     this.updateView();
-                }
-                else {
+                } else {
                     this.getDataFile().getResultSet().first();
                     this.searchMachine(lastNumberMachine);
                     JOptionPane.showMessageDialog(this, "Machine" + numberMachine + " was not found!");
@@ -739,9 +775,5 @@ public class AddDeleteMachines extends javax.swing.JFrame {
             Logger.getLogger(AddDeleteMachines.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
 
 }
-
-

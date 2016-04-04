@@ -45,7 +45,7 @@ public class AddDeletedUsers extends javax.swing.JFrame {
         labPath.setVisible(false);
         this.selectUser();
     }
-    
+
     public AddDeletedUsers(DBCasino dataFile) {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -54,6 +54,7 @@ public class AddDeletedUsers extends javax.swing.JFrame {
         this.dataFile = dataFile;
         this.selectUser();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -83,6 +84,8 @@ public class AddDeletedUsers extends javax.swing.JFrame {
         butNew = new javax.swing.JButton();
         butUpdate = new javax.swing.JButton();
         butDelete = new javax.swing.JButton();
+        labEmail = new javax.swing.JLabel();
+        txtEmail = new javax.swing.JTextField();
         butBack = new javax.swing.JButton();
         butReport = new javax.swing.JButton();
 
@@ -199,6 +202,9 @@ public class AddDeletedUsers extends javax.swing.JFrame {
             }
         });
 
+        labEmail.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        labEmail.setText("Email");
+
         javax.swing.GroupLayout panAddUserLayout = new javax.swing.GroupLayout(panAddUser);
         panAddUser.setLayout(panAddUserLayout);
         panAddUserLayout.setHorizontalGroup(
@@ -206,10 +212,6 @@ public class AddDeletedUsers extends javax.swing.JFrame {
             .addGroup(panAddUserLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panAddUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panAddUserLayout.createSequentialGroup()
-                        .addComponent(labPasswordUser)
-                        .addGap(63, 63, 63)
-                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panAddUserLayout.createSequentialGroup()
                         .addComponent(butFirst)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -234,7 +236,15 @@ public class AddDeletedUsers extends javax.swing.JFrame {
                                 .addComponent(rbtAdmon)
                                 .addGap(6, 6, 6)
                                 .addComponent(rbtEmployed))
-                            .addComponent(txtUsersCC, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtUsersCC, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(panAddUserLayout.createSequentialGroup()
+                        .addGroup(panAddUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(labEmail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(labPasswordUser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(63, 63, 63)
+                        .addGroup(panAddUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
+                            .addComponent(txtEmail))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panAddUserLayout.setVerticalGroup(
@@ -257,7 +267,11 @@ public class AddDeletedUsers extends javax.swing.JFrame {
                 .addGroup(panAddUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labPasswordUser)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panAddUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(labEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+                    .addComponent(txtEmail))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panAddUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(butFirst)
                     .addComponent(butPrevious)
@@ -415,15 +429,14 @@ public class AddDeletedUsers extends javax.swing.JFrame {
         String[] dbFields = {"userCC", "userType"};
 
         PDFReport report = new PDFReport(
-            "userReport.pdf",
-            "BATS DEVELOPERS",
-            "Casino",
-            "Users Report",
-            "Casino POKERLAND",
-            fields,
-            dbFields,
-            this.getDataFile().getResultSet());
-        
+                "userReport.pdf",
+                "BATS DEVELOPERS",
+                "Casino",
+                "Users Report",
+                "Casino POKERLAND",
+                fields,
+                dbFields,
+                this.getDataFile().getResultSet());
 
         try {
             report.generatePDF();
@@ -485,6 +498,7 @@ public class AddDeletedUsers extends javax.swing.JFrame {
     private javax.swing.JButton butPrevious;
     private javax.swing.JButton butReport;
     private javax.swing.JButton butUpdate;
+    private javax.swing.JLabel labEmail;
     private javax.swing.JLabel labPasswordUser;
     private javax.swing.JLabel labPath;
     private javax.swing.JLabel labPhoto;
@@ -495,6 +509,7 @@ public class AddDeletedUsers extends javax.swing.JFrame {
     private javax.swing.JPanel panDataUsers;
     private javax.swing.JRadioButton rbtAdmon;
     private javax.swing.JRadioButton rbtEmployed;
+    private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtUsersCC;
     // End of variables declaration//GEN-END:variables
@@ -505,6 +520,7 @@ public class AddDeletedUsers extends javax.swing.JFrame {
     private void newInterface() {
         txtUsersCC.setText("");
         txtPassword.setText("");
+        txtEmail.setText("");
         rbtEmployed.setSelected(true);
         butNew.setText("Save");
         butFirst.setEnabled(false); // Para deshabilitar un boton
@@ -517,7 +533,8 @@ public class AddDeletedUsers extends javax.swing.JFrame {
 
     private boolean validateView() {
         boolean validate = !(txtUsersCC.getText().equals("")
-                || txtPassword.getText().equals(""));
+                || txtPassword.getText().equals("")
+                || txtEmail.getText().equals(""));
         return validate;
     }
 
@@ -530,6 +547,7 @@ public class AddDeletedUsers extends javax.swing.JFrame {
         us.setUserCC(Long.parseLong(txtUsersCC.getText()));
         us.setUserType(rbtAdmon.isSelected() ? 0 : 1);
         us.setPassword((txtPassword.getText()));
+        us.setEmail(txtEmail.getText());
 
         return us;
     }
@@ -557,6 +575,7 @@ public class AddDeletedUsers extends javax.swing.JFrame {
             us.setUserCC(this.getDataFile().getResultSet().getLong("userCC"));
             us.setUserType(this.getDataFile().getResultSet().getInt("userType"));
             us.setPassword(this.getDataFile().getResultSet().getString("password"));
+            us.setEmail(this.getDataFile().getResultSet().getString("email"));
             this.object2View(us);
         } catch (SQLException ex) {
             Logger.getLogger(AddDeletedUsers.class.getName()).log(Level.SEVERE, null, ex);
@@ -573,7 +592,7 @@ public class AddDeletedUsers extends javax.swing.JFrame {
         txtPassword.setText(us.getPassword());
         rbtAdmon.setSelected(us.getUserType() == 0);
         rbtEmployed.setSelected(us.getUserType() == 1);
-
+        txtEmail.setText("" + us.getEmail());
     }
 
     /**
@@ -599,11 +618,12 @@ public class AddDeletedUsers extends javax.swing.JFrame {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         String query = "INSERT INTO user "
-                + "(userCC, userType, password) "
+                + "(userCC, userType, password, email) "
                 + "VALUES ("
                 + us.getUserCC() + ","
                 + us.getUserType() + ",'"
-                + us.getPassword() + "' "
+                + us.getPassword() + "','"
+                + us.getEmail() + "'"
                 + ")";
         if (this.getDataFile().execute(query)) {
             this.selectUser();
@@ -620,7 +640,8 @@ public class AddDeletedUsers extends javax.swing.JFrame {
 
         String query = "UPDATE user SET "
                 + "userType = " + us.getUserType() + ", "
-                + "password = '" + us.getPassword()+ "' "
+                + "password = '" + us.getPassword() + "', "
+                + "email = '" + us.getEmail() + "'"
                 + "WHERE userCC = " + us.getUserCC();
         if (this.getDataFile().execute(query)) {
             this.selectUser();

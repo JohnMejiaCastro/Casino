@@ -5,7 +5,6 @@
  */
 package logic;
 
-
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -17,25 +16,30 @@ import java.util.logging.Level;
  */
 public class Users {
 
-    private long userCC;
     /**
      * Username attribute
      */
-    private int userType;
+    private long userCC;
+
     /**
      * Type of user
      */
-    private String password;
+    private int userType;
 
     /**
      * User password
      */
+    private String password;
+    /**
+     *email user 
+     */
+    private String email;
 
     /**
      * Default Constructor
      */
     public Users() {
-     
+
     }
 
     /**
@@ -43,12 +47,13 @@ public class Users {
      * @param userCC User name
      * @param userType User Type
      * @param password User password
-     * @param photo user photo
+     * @param email User email
      */
-    public Users(long userCC, int userType, String password) {
+    public Users(long userCC, int userType, String password, String email) {
         this.userCC = userCC;
         this.userType = userType;
         this.setPassword(password);
+        this.email = email;
 
     }
 
@@ -96,6 +101,7 @@ public class Users {
     public String getPassword() {
         return password;
     }
+    
 
     /**
      * set user password
@@ -108,12 +114,26 @@ public class Users {
             md = MessageDigest.getInstance("MD5");
             md.update(password.getBytes(), 0, password.length());
             this.password = new BigInteger(1, md.digest()).toString(16);
-       
+
         } catch (NoSuchAlgorithmException ex) {
             java.util.logging.Logger.getLogger(Users.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-  
+    /**
+     * 
+     * @return 
+     */
+    public String getEmail() {
+        return email;
+    }
+    /**
+     * 
+     * @param email 
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+    
 
 }
