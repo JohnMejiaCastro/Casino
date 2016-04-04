@@ -63,6 +63,7 @@ public class DBCasino {
     /**
      * connected = true, not connected = false
      *
+     * @param dbFilename
      * @return
      */
     public boolean connectMSAcces(String dbFilename) {
@@ -97,6 +98,7 @@ public class DBCasino {
             result = true;
         } catch (SQLException ex) {
             Logger.getLogger(DBCasino.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
         return result;
     }

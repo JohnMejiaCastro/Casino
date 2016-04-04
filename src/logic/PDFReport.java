@@ -122,13 +122,11 @@ public class PDFReport {
         this.resultSet = resultSet;
     }
     
-    
     public void generatePDF() throws SQLException{
         Font bfBold12 = new Font (Font.FontFamily.HELVETICA, 8, Font.BOLD, BaseColor.WHITE);
         Font b12 = new Font(Font.FontFamily.HELVETICA,  8);
         int columns = this.getFields().length;
         Paragraph header;
-        
         
         try {
             Document doc  =  new Document();
@@ -162,7 +160,7 @@ public class PDFReport {
             PdfPTable table = new PdfPTable(columns);
             table.setWidthPercentage(95f);
             
-             for (String field : this.getFields()) {
+            for (String field : this.getFields()) {
                 this.insertPDFCell(table, field, Element.ALIGN_CENTER, 1, bfBold12, BaseColor.BLACK);
             }
             table.setHeaderRows(1);
@@ -187,15 +185,7 @@ public class PDFReport {
         }
     }
 
-            
-            
-            
-            
-            
-            
-       
-
-    private void insertPDFCell(PdfPTable table, String text, int align, int colspan, Font font, BaseColor Background) {
+    public void insertPDFCell(PdfPTable table, String text, int align, int colspan, Font font, BaseColor Background) {
        
         PdfPCell cell = new PdfPCell(new Phrase(text.trim(), font));
         cell.setHorizontalAlignment(align);

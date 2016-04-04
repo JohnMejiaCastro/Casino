@@ -112,7 +112,7 @@ public class XMLReportDay {
         DataDayReport dataDayReport = new DataDayReport();
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            dataDayReport.setNumberMachine((element.getAttribute("NumberMachine")));
+//            dataDayReport.setNumberMachine((element.getAttribute("NumberMachine")));
             dataDayReport.setMachineInputDayCurrent(Long.parseLong(getTagValue(element, "InMachine")));
             dataDayReport.setMachineOutDayCurrent(Long.parseLong(getTagValue(element, "OutMachine")));
             dataDayReport.setDayDate(dateFormat.parse(getTagValue(element, "DateDay")));
@@ -179,7 +179,7 @@ public class XMLReportDay {
 
         SimpleDateFormat dateformat = new SimpleDateFormat("dd/MM/yyyy");
         Element element = doc.createElement("Day");
-        element.setAttribute("NumberMachine", dataDayReport.getNumberMachine());
+//        element.setAttribute("NumberMachine", dataDayReport.getNumberMachine());
         element.appendChild(setTag(doc, element, "InMachine", "" + dataDayReport.getMachineInputDayCurrent()));
         element.appendChild(setTag(doc, element, "OutMachine", "" + dataDayReport.getMachineOutDayCurrent()));
         element.appendChild(setTag(doc, element, "DateDay", dateformat.format(dataDayReport.getDayDate())));

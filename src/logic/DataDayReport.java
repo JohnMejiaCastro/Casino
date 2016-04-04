@@ -56,7 +56,7 @@ public class DataDayReport {
      * @param machineInputDayCurrent Current Input Day
      * @param machineOutDayCurrent Current Output day
      */
-    public DataDayReport(Date dayDate2, int resultDay, Date dayDate, int numberMachine, long availableMoney, long expensesEmployee, long machineInputDayCurrent, long machineOutDayCurrent) {
+    public DataDayReport(Date dayDate, int numberMachine, long machineInputDayCurrent, long machineOutDayCurrent) {
         this.dayDate = dayDate;
         this.numberMachine = numberMachine;     
         this.machineInputDayCurrent = machineInputDayCurrent;

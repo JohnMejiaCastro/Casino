@@ -27,7 +27,6 @@ import logic.Users;
 public class Login extends javax.swing.JFrame {
 
     private DBCasino datafile;
-
     public boolean show = true;
 
     public Login() {
@@ -35,8 +34,7 @@ public class Login extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
 
         this.datafile = new DBCasino();
-        this.datafile.connectMSAcces("C:\\Users\\johnleandro\\Documents\\NetBeansProjects\\14-03-16--1,58amCasino DB\\src\\Casino\\persistence\\CasinoDB.accdb");
-//        this.setUserList(dataFile.selectUser());
+        this.datafile.connectMSAcces("C:\\Users\\johnleandro\\Documents\\NetBeansProjects\\fullCasino\\Casino\\src\\casino\\persistence\\CasinoDB.accdb");
         this.selectUser();
     }
 
@@ -236,33 +234,20 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtViewPasswordActionPerformed
 
     private void butLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butLoginActionPerformed
-        
-            //        if ((this.txtViewPassword.getText().equalsIgnoreCase("13579zk")
-//                && this.txtUser.getText().equalsIgnoreCase("1049650471"))
-//                || (this.txtPassword.getText().equalsIgnoreCase("13579zk")
-//                && this.txtUser.getText().equalsIgnoreCase("1049650471"))) {
-//
-//            MenuManager Wconnect = new MenuManager();
-//            Wconnect.setVisible(true);
-//            dispose();
-//        } else {
-//        Users();
-//        }
-if (this.isPassword(txtUser.getText(), new String(txtPassword.getPassword()))) {
-      
+
+        if (this.isPassword(txtUser.getText(), new String(txtPassword.getPassword()))) {
+
             try {
                 int level = this.getDataFile().getResultSet().getInt("userType");
-                MenuManager mdiForm = new MenuManager(this.getDataFile(),level);
-                if (level == 0){
-                    MenuManager form = new MenuManager();
+                //MenuManager mdiForm = new MenuManager(this.getDataFile(), level);
+                if (level == 0) {
+                    MenuManager form = new MenuManager(this.getDataFile());
                     form.setVisible(true);
                     dispose();
-                }else {
-                    if (level == 1 ){
-                        EmployeeIU form = new EmployeeIU();
-                        form.setVisible(true);
-                        dispose();
-                    }
+                } else if (level == 1) {
+                    EmployeeIU form = new EmployeeIU(this.getDataFile());
+                    form.setVisible(true);
+                    dispose();
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
@@ -272,7 +257,6 @@ if (this.isPassword(txtUser.getText(), new String(txtPassword.getPassword()))) {
             JOptionPane.showMessageDialog(this,
                     "Sorry, Username and password do not match!", "Login",
                     JOptionPane.ERROR_MESSAGE);
-
 
         }
 
@@ -337,7 +321,6 @@ if (this.isPassword(txtUser.getText(), new String(txtPassword.getPassword()))) {
      */
     public void Users() throws SQLException {
 
-      
 //        if ((this.txtViewPassword.getText().equalsIgnoreCase("13579zk")
 //                && this.txtUser.getText().equalsIgnoreCase("1049645412"))
 //                || (this.txtPassword.getText().equalsIgnoreCase("13579zk")
@@ -348,8 +331,6 @@ if (this.isPassword(txtUser.getText(), new String(txtPassword.getPassword()))) {
 //        } else {
 //            
 //        }
-
-        
     }
 
     private void selectUser() {
@@ -365,24 +346,23 @@ if (this.isPassword(txtUser.getText(), new String(txtPassword.getPassword()))) {
         }
 
     }
-    
-    private boolean isPassword(String username, String password)  {
+
+    private boolean isPassword(String username, String password) {
         boolean correct = false;
-        
+
         try {
             MessageDigest md;
             md = MessageDigest.getInstance("MD5");
             md.update(password.getBytes(), 0, password.length());
             password = new BigInteger(1, md.digest()).toString(16);
-       
-            
-            if (this.getDataFile().getResultSet() !=null){
+
+            if (this.getDataFile().getResultSet() != null) {
                 this.getDataFile().getResultSet().beforeFirst();
-                while(this.getDataFile().getResultSet().next()){
-                    if(this.getDataFile().getResultSet().getString("userCC")
-                        .equals(username)){
-                        if(this.getDataFile().getResultSet()
-                                .getString("password").equals(password)){
+                while (this.getDataFile().getResultSet().next()) {
+                    if (this.getDataFile().getResultSet().getString("userCC")
+                            .equals(username)) {
+                        if (this.getDataFile().getResultSet()
+                                .getString("password").equals(password)) {
                             correct = true;
                         }
                         break;

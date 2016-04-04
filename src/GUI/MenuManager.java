@@ -25,13 +25,11 @@ public class MenuManager extends javax.swing.JFrame {
         this.setTitle("Menú");
     }
 
-    MenuManager(DBCasino dataFile, int userLevel) {
-          
-        initComponents();           
+    MenuManager(DBCasino dataFile) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.setTitle("Menú");
         this.dataFile = dataFile;
-        this.userLevel = userLevel;
-        
-              
     }
 
     public DBCasino getDataFile() {
@@ -61,7 +59,6 @@ public class MenuManager extends javax.swing.JFrame {
     private void initComponents() {
 
         panMenuAdiministrador = new javax.swing.JPanel();
-        butDayReport = new javax.swing.JButton();
         butMonthlyReport = new javax.swing.JButton();
         butMachines = new javax.swing.JButton();
         butUsers = new javax.swing.JButton();
@@ -74,18 +71,9 @@ public class MenuManager extends javax.swing.JFrame {
 
         panMenuAdiministrador.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        butDayReport.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        butDayReport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pictures/report.png"))); // NOI18N
-        butDayReport.setText("Report Day");
-        butDayReport.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                butDayReportActionPerformed(evt);
-            }
-        });
-
         butMonthlyReport.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        butMonthlyReport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pictures/reportMonth.png"))); // NOI18N
-        butMonthlyReport.setText("Report Month");
+        butMonthlyReport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pictures/report.png"))); // NOI18N
+        butMonthlyReport.setText("Reports");
         butMonthlyReport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 butMonthlyReportActionPerformed(evt);
@@ -118,23 +106,20 @@ public class MenuManager extends javax.swing.JFrame {
                 .addGap(67, 67, 67)
                 .addGroup(panMenuAdiministradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(butMonthlyReport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(butDayReport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(butMachines, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(butUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(102, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panMenuAdiministradorLayout.setVerticalGroup(
             panMenuAdiministradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panMenuAdiministradorLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(butDayReport, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(butMonthlyReport, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE)
+                .addComponent(butMonthlyReport)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(butMachines, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(butUsers)
-                .addGap(69, 69, 69))
+                .addGap(26, 26, 26))
         );
 
         panDataUsers.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -161,7 +146,7 @@ public class MenuManager extends javax.swing.JFrame {
                 .addComponent(labPokerland)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(butLogOut)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(labPhoto)
                 .addContainerGap())
         );
@@ -196,18 +181,12 @@ public class MenuManager extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(panDataUsers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panMenuAdiministrador, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panMenuAdiministrador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void butDayReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butDayReportActionPerformed
-        ReportDay Wconnect = new ReportDay();
-        Wconnect.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_butDayReportActionPerformed
 
     private void butLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butLogOutActionPerformed
         Login Wconnect = new Login();       
@@ -216,19 +195,19 @@ public class MenuManager extends javax.swing.JFrame {
     }//GEN-LAST:event_butLogOutActionPerformed
 
     private void butMonthlyReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butMonthlyReportActionPerformed
-        ReportMonth Wconnect = new ReportMonth();
+        Reports Wconnect = new Reports(this.getDataFile());
         Wconnect.setVisible(true);
         dispose();
     }//GEN-LAST:event_butMonthlyReportActionPerformed
 
     private void butMachinesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butMachinesActionPerformed
-        AddDeleteMachines Wconnect = new AddDeleteMachines();
+        AddDeleteMachines Wconnect = new AddDeleteMachines(this.getDataFile());
         Wconnect.setVisible(true);
         dispose();
     }//GEN-LAST:event_butMachinesActionPerformed
 
     private void butUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butUsersActionPerformed
-        AddDeletedUsers Wconnect = new AddDeletedUsers();
+        AddDeletedUsers Wconnect = new AddDeletedUsers(this.dataFile);
         Wconnect.setVisible(true);
         dispose();
     }//GEN-LAST:event_butUsersActionPerformed
@@ -269,7 +248,6 @@ public class MenuManager extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton butDayReport;
     private javax.swing.JButton butLogOut;
     private javax.swing.JButton butMachines;
     private javax.swing.JButton butMonthlyReport;

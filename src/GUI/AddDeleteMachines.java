@@ -45,11 +45,17 @@ public class AddDeleteMachines extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setTitle("Maquinas");
-        this.dataFile = new DBCasino();
-        this.dataFile.connectMSAcces("C:\\Users\\johnleandro\\Documents\\NetBeansProjects\\14-03-16--1,58amCasino DB\\src\\Casino\\persistence\\CasinoDB.accdb");
         this.selectMachine();
     }
 
+    public AddDeleteMachines(DBCasino dataFile) {
+
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.setTitle("Maquinas");
+        this.dataFile = dataFile;
+        this.selectMachine();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -359,7 +365,7 @@ public class AddDeleteMachines extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void butBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butBackActionPerformed
-        MenuManager Wconnect = new MenuManager();
+        MenuManager Wconnect = new MenuManager(this.getDataFile());
         Wconnect.setVisible(true);
         dispose();
     }//GEN-LAST:event_butBackActionPerformed
@@ -442,7 +448,6 @@ public class AddDeleteMachines extends javax.swing.JFrame {
     }//GEN-LAST:event_butFirstActionPerformed
 
     private void butReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butReportActionPerformed
-        
         String[] fields = {"Number Machine", "Machine Type", "Counters In", "Counters Out", "Acquisition Date", "Bet Value"};
         String[] dbFields = {"numberMachine", "machineType", "accountantIn", "accountantOut", "dayAcquisicion", "BetValue"};
 

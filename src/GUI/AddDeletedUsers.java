@@ -43,11 +43,17 @@ public class AddDeletedUsers extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setTitle("USERS");
         labPath.setVisible(false);
-        this.dataFile = new DBCasino();
-        this.dataFile.connectMSAcces("C:\\Users\\johnleandro\\Documents\\NetBeansProjects\\14-03-16--1,58amCasino DB\\src\\Casino\\persistence\\CasinoDB.accdb");
         this.selectUser();
     }
-
+    
+    public AddDeletedUsers(DBCasino dataFile) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.setTitle("USERS");
+        labPath.setVisible(false);
+        this.dataFile = dataFile;
+        this.selectUser();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -319,7 +325,7 @@ public class AddDeletedUsers extends javax.swing.JFrame {
     }//GEN-LAST:event_rbtAdmonActionPerformed
 
     private void butBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butBackActionPerformed
-        MenuManager Wconnect = new MenuManager();
+        MenuManager Wconnect = new MenuManager(this.getDataFile());
         Wconnect.setVisible(true);
         dispose();
     }//GEN-LAST:event_butBackActionPerformed
@@ -410,8 +416,8 @@ public class AddDeletedUsers extends javax.swing.JFrame {
 
         PDFReport report = new PDFReport(
             "userReport.pdf",
-            "JF",
-            "BillApp",
+            "BATS DEVELOPERS",
+            "Casino",
             "Users Report",
             "Casino POKERLAND",
             fields,
