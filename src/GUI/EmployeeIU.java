@@ -30,30 +30,7 @@ public class EmployeeIU extends javax.swing.JFrame {
     private DBCasino dataFile;
     private int[] machineIndexes;
 
-    public DBCasino getDataFile() {
-        return dataFile;
-    }
-
-    public void setDataFile(DBCasino dataFile) {
-        this.dataFile = dataFile;
-    }
-
-    public int[] getMachineIndexes() {
-        return machineIndexes;
-    }
-
-    public void setMachineIndexes(int[] machineIndexes) {
-        this.machineIndexes = machineIndexes;
-    }
-
-    public long getMachineIndexes(int index) {
-        return this.machineIndexes[index];
-    }
-
-    public void setMachineIndexes(int index, int value) {
-        this.machineIndexes[index] = value;
-    }
-
+    
     /**
      * Creates new form EmployeeIU
      */
@@ -86,6 +63,54 @@ public class EmployeeIU extends javax.swing.JFrame {
 
         this.newInterface();
     }
+    
+    /**
+     * get DataFile 
+     * @return  dataFile
+     */
+    public DBCasino getDataFile() {
+        return dataFile;
+    }
+/**
+ * set DBCasino
+ * @param dataFile DBCasino 
+ */
+    public void setDataFile(DBCasino dataFile) {
+        this.dataFile = dataFile;
+    }
+/**
+ * get the position of the machine
+ * @return  machineIndex
+ */
+    public int[] getMachineIndexes() {
+        return machineIndexes;
+    }
+
+    /**
+     * set the position of the machine
+     * @param machineIndexes 
+     */
+    public void setMachineIndexes(int[] machineIndexes) {
+        this.machineIndexes = machineIndexes;
+    }
+
+    /**
+     * get the position of the machine
+     * @param index int 
+     * @return  machineIndexs
+     */
+    public long getMachineIndexes(int index) {
+        return this.machineIndexes[index];
+    }
+/**
+ * set the position of the machine
+ * @param index int 
+ * @param value  machineIndexes
+ */
+    public void setMachineIndexes(int index, int value) {
+        this.machineIndexes[index] = value;
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -363,34 +388,10 @@ public class EmployeeIU extends javax.swing.JFrame {
         butNew.setText("Save");
 
     }
-
     /**
-     * You Save the Dta of Interface
-     *
-     * @return
+     * obtain the view data and tranfer it to the object 
+     * @return  rep
      */
-    /**
-     * You obtain data from the interface and passes it to an object
-     *
-     * @return DataDayReport dateReport //
-     */
-//    private void object2View() {
-//        Timestamp timeStamp;
-//        DataDayReport rep = new DataDayReport();
-//
-//        try {
-//            rep.setNumberMachine(this.getDataFile().getResultSet().getInt(1));
-//            
-////            timeStamp = this.getDataFile().getResultSet().getTimestamp("dayDate");
-////            rep.setDayDate((timeStamp == null)? null : new Date(timeStamp.getTime()));
-//            rep.setMachineInputDayCurrent(this.getDataFile().getResultSet().getLong(3));
-//            rep.setMachineOutDayCurrent(this.getDataFile().getResultSet().getLong(4));
-//            this.object2View(rep);
-//            
-//        } catch (SQLException ex) {
-//            Logger.getLogger(EmployeeIU.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
     private DataDayReport view2Object() {
 
         DataDayReport rep = new DataDayReport();
@@ -427,6 +428,10 @@ public class EmployeeIU extends javax.swing.JFrame {
         butNew.setText("Save");
     }
 
+    /**
+ * validate UI
+ * @return  validate
+ */
     private boolean validateView() {
 
         boolean validate = !(jcbNumberMachine.getSelectedItem().equals("")
@@ -436,6 +441,9 @@ public class EmployeeIU extends javax.swing.JFrame {
         return validate;
     }
 
+    /**
+     * Obtain the view data and tranfer it to the object
+     */
     private void selectReport() {
         String query = "SELECT * FROM dateDayReport";
         if (this.getDataFile().execute(query)) {
@@ -448,6 +456,9 @@ public class EmployeeIU extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Select machine from DB
+     */
     private void selectMachine() {
         String query = "SELECT * FROM machine";
         if (this.getDataFile().execute(query)) {
@@ -460,6 +471,9 @@ public class EmployeeIU extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * load machine 
+     */
     private void loadMachineCombo() {
         jcbNumberMachine.removeAllItems();
         this.setMachineIndexes(new int[this.selectCountMachine()]);
@@ -480,7 +494,10 @@ public class EmployeeIU extends javax.swing.JFrame {
             }
         }
     }
-
+/**
+ * select count machine
+ * @return count 
+ */
     private int selectCountMachine() {
         int count = 0;
         String query = "SELECT count(*) FROM machine";
@@ -498,6 +515,9 @@ public class EmployeeIU extends javax.swing.JFrame {
 //    private void updateView() {
 //        
 //    }
+    /**
+     * You obtain data from an object and pass it to the view
+     */
     private void updateView() {
         if ((this.getDataFile().getResultSet() == null)
                 || (this.selectCountMachine() <= 0)) {
@@ -507,6 +527,9 @@ public class EmployeeIU extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * select report day
+     */
     private void selectReportDay() {
         String query = "SELECT * FROM dateReportDay";
         if (this.getDataFile().execute(query)) {
@@ -518,7 +541,11 @@ public class EmployeeIU extends javax.swing.JFrame {
             }
         }
     }
-
+/**
+ * serach machine 
+ * @param numberMachine int 
+ * @return  index 
+ */
     private int searchMahineIndex(int numberMachine) {
         int index = 0;
         for (int i = 0; i < this.getMachineIndexes().length; i++) {
@@ -529,7 +556,9 @@ public class EmployeeIU extends javax.swing.JFrame {
         }
         return index;
     }
-
+/**
+ * insert report day 
+ */
     private void insertReportDay() {
 
         DataDayReport rep = this.view2Object();

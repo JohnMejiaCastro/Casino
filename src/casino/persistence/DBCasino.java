@@ -35,27 +35,45 @@ public class DBCasino {
     public DBCasino() {
         
     }
-
+/**
+ * get connection DB
+ * @return connection
+ */
     public Connection getConnection() {
         return connection;
     }
-
+/**
+ * set connection DB
+ * @param connection  
+ */
     public void setConnection(Connection connection) {
         this.connection = connection;
     }
-
+/**
+ * get statment 
+ * @return  statment 
+ */
     public Statement getStatment() {
         return statment;
     }
-
+/**
+ * set statment
+ * @param statment 
+ */
     public void setStatment(Statement statment) {
         this.statment = statment;
     }
-
+/**
+ * get resulset 
+ * @return  resulset
+ */
     public ResultSet getResultSet() {
         return resultSet;
     }
-
+/**
+ * set resultset
+ * @param resultSet 
+ */
     public void setResultSet(ResultSet resultSet) {
         this.resultSet = resultSet;
     }

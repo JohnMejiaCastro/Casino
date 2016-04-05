@@ -29,7 +29,10 @@ public class MenuManager extends javax.swing.JFrame {
         butInfo.setContentAreaFilled(false);
         butInfo.setBorderPainted(false);
     }
-
+/**
+ * 
+ * @param dataFile  DBcasino
+ */
     MenuManager(DBCasino dataFile) {
         initComponents();
         butInfo.setOpaque(false);
@@ -40,18 +43,31 @@ public class MenuManager extends javax.swing.JFrame {
         this.dataFile = dataFile;
     }
 
+    /**
+     * get data file DBCasino
+     * @return  datafile
+     */
     public DBCasino getDataFile() {
         return dataFile;
     }
-
+/**
+ * set Data file DBCasino
+ * @param dataFile  dataFile
+ */
     public void setDataFile(DBCasino dataFile) {
         this.dataFile = dataFile;
     }
-
+/**
+ *get user level  
+ * @return userLevel
+ */
     public int getUserLevel() {
         return userLevel;
     }
-
+/**
+ * set Users level
+ * @param userLevel 
+ */
     public void setUserLevel(int userLevel) {
         this.userLevel = userLevel;
     }

@@ -28,7 +28,9 @@ public class Login extends javax.swing.JFrame {
 
     private DBCasino datafile;
     public boolean show = true;
-
+     /**
+     * Creates new form Forgot
+     */
     public Login() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -38,10 +40,18 @@ public class Login extends javax.swing.JFrame {
         this.selectUser();
     }
 
+    /**
+     * get DBCasino 
+     * @return  datafile
+     */
     public DBCasino getDataFile() {
         return this.datafile;
     }
 
+    /**
+     * set DBCasino
+     * @param dataFile DBCasino
+     */
     private void setDataFile(DBCasino dataFile) {
         this.datafile = dataFile;
     }
@@ -339,6 +349,13 @@ public class Login extends javax.swing.JFrame {
 
     }
 
+    /**
+      
+     *algorithm to encrypt the password
+     * @param username String 
+     * @param password string 
+     * @return correct 
+     */
     private boolean isPassword(String username, String password) {
         boolean correct = false;
 

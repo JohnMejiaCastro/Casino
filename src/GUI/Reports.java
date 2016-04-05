@@ -48,14 +48,6 @@ public class Reports extends javax.swing.JFrame {
     String reportDayTitule = "REPORT DAY";
     String reportMonthTitule = "REPORT MONTH";
 
-    public DBCasino getDataFile() {
-        return dataFile;
-    }
-
-    public void setDataFile(DBCasino dataFile) {
-        this.dataFile = dataFile;
-    }
-
     /**
      * Creates new form ReportMonth
      */
@@ -79,6 +71,23 @@ public class Reports extends javax.swing.JFrame {
         this.dataFile = dataFile;
         
     }
+    
+    /**
+     * Get data file DBCasino
+     * @return  datafile 
+     */
+    public DBCasino getDataFile() {
+        return dataFile;
+    }
+/**
+ * set Data file
+ * @param dataFile 
+ */
+    public void setDataFile(DBCasino dataFile) {
+        this.dataFile = dataFile;
+    }
+
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -330,12 +339,18 @@ public class Reports extends javax.swing.JFrame {
     private javax.swing.JPanel panReportMonth;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * update interface 
+     */
     private void updateView() {
         if (this.getDataFile().getResultSet() == null) {
             this.newInterface();
         }
     }
 
+    /**
+     * new inerface 
+     */
     private void newInterface() {
 
         jDateDay.setDate(new Date());
@@ -399,6 +414,14 @@ public class Reports extends javax.swing.JFrame {
         return listReport;
     }
 
+    /**
+     * generate pdf 
+     * @param doc Document 
+     * @param pdfFilename string 
+     * @param author String 
+     * @param appName String 
+     * @param companyName  String 
+     */
     private void pdfHeader(Document doc, String pdfFilename, String author, String appName, String companyName) {
         try {
             Paragraph header;
@@ -478,11 +501,11 @@ public class Reports extends javax.swing.JFrame {
 
                 for (DataDayReport report : reportList) {
                     if (machine.getNumberMachine() == report.getNumberMachine()) {
-                        if (report.getDayDate().equals(jDateDay.getDate())) {
+                        if (dateFormat.format(report.getDayDate()).equals (dateFormat.format((jDateDay.getDate())))) {
                             todayInCounter = report.getMachineInputDayCurrent();
                             todayOutCounter = report.getMachineOutDayCurrent();
                         }
-                        if (report.getDayDate().equals(diaAnterior)) {
+                        if (dateFormat.format(report.getDayDate()).equals (dateFormat.format(diaAnterior))) {
                             yesterdayInCounter = report.getMachineInputDayCurrent();
                             yesterdayOutCounter = report.getMachineOutDayCurrent();
                         }
@@ -545,7 +568,14 @@ public class Reports extends javax.swing.JFrame {
     
     
     
-    
+    /**
+     * generate pdf Dates  report  
+     * @param doc Document 
+     * @param pdfFilename String 
+     * @param author Sring 
+     * @param appName Sring 
+     * @param companyName  string 
+     */
     
     private void pdfHeaderReportDates(Document doc, String pdfFilename, String author, String appName, String companyName) {
         try {
@@ -584,6 +614,9 @@ public class Reports extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * select Report dates 
+     */
     private void selectReportDates() {
         
         String fields[] = {"Machine",

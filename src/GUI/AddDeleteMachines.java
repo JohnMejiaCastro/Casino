@@ -31,7 +31,7 @@ public class AddDeleteMachines extends javax.swing.JFrame {
     private DBCasino dataFile;
 
     /**
-     *
+     *Get data file
      * @return
      */
     public DBCasino getDataFile() {
@@ -39,15 +39,15 @@ public class AddDeleteMachines extends javax.swing.JFrame {
     }
 
     /**
-     *
-     * @param dataFile
+     *set  data file 
+     * @param dataFile DBCasino
      */
     public void setDataFile(DBCasino dataFile) {
         this.dataFile = dataFile;
     }
 
     /**
-     *
+     *default  constructor
      */
     public AddDeleteMachines() {
         initComponents();
@@ -61,8 +61,8 @@ public class AddDeleteMachines extends javax.swing.JFrame {
     }
 
     /**
-     *
-     * @param dataFile
+     *constructor add, delete, machine 
+     * @param dataFile DBCasino
      */
     public AddDeleteMachines(DBCasino dataFile) {
 
@@ -626,7 +626,7 @@ public class AddDeleteMachines extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     /**
-     *
+     *you ´prepare the view enter a new employee data 
      */
     private void newInterface() {
         txtNumberMachine.setText("");
@@ -645,7 +645,7 @@ public class AddDeleteMachines extends javax.swing.JFrame {
     }
 
     /**
-     *
+     *validate UI
      * @return
      */
     private boolean validateView() {
@@ -658,7 +658,7 @@ public class AddDeleteMachines extends javax.swing.JFrame {
     }
 
     /**
-     *
+     *obtain the view data and tranfer it to object 
      * @return
      */
     private Machine view2Object() {
@@ -675,7 +675,7 @@ public class AddDeleteMachines extends javax.swing.JFrame {
     }
 
     /**
-     *
+     *you obtain data from an object and pass it to the view 
      */
     private void updateView() {
         if (this.getDataFile().getResultSet() == null) {
@@ -686,7 +686,7 @@ public class AddDeleteMachines extends javax.swing.JFrame {
     }
 
     /**
-     *
+     *result set objecct 
      */
     private void object2View() {
         Machine ma = new Machine();
@@ -704,7 +704,7 @@ public class AddDeleteMachines extends javax.swing.JFrame {
     }
 
     /**
-     *
+     *show the  object data into view 
      * @param ma
      */
     private void object2View(Machine ma) {
@@ -718,7 +718,7 @@ public class AddDeleteMachines extends javax.swing.JFrame {
     }
 
     /**
-     *
+     *select machne from DB
      */
     private void selectMachine() {
         String query = "SELECT * FROM machine";
@@ -733,7 +733,7 @@ public class AddDeleteMachines extends javax.swing.JFrame {
     }
 
     /**
-     *
+     *insert new machine 
      */
     private void insertMachine() {
         Machine ma = this.view2Object();
@@ -755,7 +755,7 @@ public class AddDeleteMachines extends javax.swing.JFrame {
     }
 
     /**
-     *
+     *update machne 
      */
     private void updateMachine() {
         Machine ma = this.view2Object();
@@ -775,7 +775,7 @@ public class AddDeleteMachines extends javax.swing.JFrame {
     }
 
     /**
-     *
+     *delete machine 
      */
     private void deleteMachine() {
         Machine ma = this.view2Object();
@@ -786,7 +786,7 @@ public class AddDeleteMachines extends javax.swing.JFrame {
     }
 
     /**
-     *
+     *search machine 
      * @param numberMachine
      */
     private void searchMachine(int numberMachine) {

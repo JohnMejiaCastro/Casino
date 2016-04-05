@@ -29,15 +29,25 @@ import logic.Users;
 public class AddDeletedUsers extends javax.swing.JFrame {
 
     private DBCasino dataFile;
-
+    
+    /**
+     * get data base DBCasino
+     * @return 
+     */
     public DBCasino getDataFile() {
         return dataFile;
     }
-
+    /**
+     * set data base Casin
+     * @param dataFile 
+     */
     public void setDataFile(DBCasino dataFile) {
         this.dataFile = dataFile;
     }
-
+    
+    /**
+     * creates new from add delete users 
+     */
     public AddDeletedUsers() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -530,7 +540,10 @@ public class AddDeletedUsers extends javax.swing.JFrame {
         butDelete.setEnabled(false);
         butUpdate.setEnabled(false);
     }
-
+/**
+ * validate UI
+ * @return  validate
+ */
     private boolean validateView() {
         boolean validate = !(txtUsersCC.getText().equals("")
                 || txtPassword.getText().equals("")
@@ -611,7 +624,7 @@ public class AddDeletedUsers extends javax.swing.JFrame {
     }
 
     /**
-     * Insert new us
+     * Insert new user
      */
     private void insertUser() {
         Users us = this.view2Object();
@@ -632,7 +645,7 @@ public class AddDeletedUsers extends javax.swing.JFrame {
     }
 
     /**
-     * Update us
+     * Update user
      */
     private void updateUser() {
         Users us = this.view2Object();
@@ -650,7 +663,7 @@ public class AddDeletedUsers extends javax.swing.JFrame {
     }
 
     /**
-     * Delete us
+     * Delete user
      */
     private void deleteUser() {
         Users us = this.view2Object();
