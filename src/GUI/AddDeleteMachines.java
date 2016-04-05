@@ -53,7 +53,11 @@ public class AddDeleteMachines extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setTitle("Maquinas");
+        butInfo.setOpaque(false);
+        butInfo.setContentAreaFilled(false);
+        butInfo.setBorderPainted(false);
         this.selectMachine();
+        
     }
 
     /**
@@ -63,6 +67,9 @@ public class AddDeleteMachines extends javax.swing.JFrame {
     public AddDeleteMachines(DBCasino dataFile) {
 
         initComponents();
+        butInfo.setOpaque(false);
+        butInfo.setContentAreaFilled(false);
+        butInfo.setBorderPainted(false);
         this.setLocationRelativeTo(null);
         this.setTitle("Maquinas");
         this.dataFile = dataFile;
@@ -107,6 +114,7 @@ public class AddDeleteMachines extends javax.swing.JFrame {
         labPokerland = new javax.swing.JLabel();
         labPath = new javax.swing.JLabel();
         butReport = new javax.swing.JButton();
+        butInfo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -119,7 +127,7 @@ public class AddDeleteMachines extends javax.swing.JFrame {
             }
         });
 
-        panDetailsAddMachine.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalles Agregar Maquina"));
+        panDetailsAddMachine.setBorder(javax.swing.BorderFactory.createTitledBorder("Machine Details"));
 
         labNumberMachine.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         labNumberMachine.setText("Number Machine");
@@ -301,7 +309,7 @@ public class AddDeleteMachines extends javax.swing.JFrame {
                     .addComponent(butDelete)))
         );
 
-        panDateUsers.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos Usuario"));
+        panDateUsers.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         labPhoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pictures/admon.png"))); // NOI18N
 
@@ -342,6 +350,15 @@ public class AddDeleteMachines extends javax.swing.JFrame {
             }
         });
 
+        butInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pictures/info-16.png"))); // NOI18N
+        butInfo.setText("Help");
+        butInfo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        butInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butInfoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -349,21 +366,29 @@ public class AddDeleteMachines extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(panDateUsers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panDetailsAddMachine, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(73, 73, 73)
-                        .addComponent(butBack)
-                        .addGap(43, 43, 43)
-                        .addComponent(butReport)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(panDateUsers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(panDetailsAddMachine, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(73, 73, 73)
+                                .addComponent(butBack)
+                                .addGap(43, 43, 43)
+                                .addComponent(butReport)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(butInfo)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(butInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panDateUsers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panDetailsAddMachine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -371,7 +396,7 @@ public class AddDeleteMachines extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(butBack, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(butReport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -514,6 +539,16 @@ public class AddDeleteMachines extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_butReportActionPerformed
 
+    private void butInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butInfoActionPerformed
+      try {
+    Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + "C:\\Users\\johnleandro\\Documents\\NetBeansProjects\\fullCasino\\Casino\\src\\Docs\\HelpAddDeleteMachines.pdf");
+} catch (IOException ex) {
+                Logger.getLogger(AddDeleteMachines.class.getName()).log(Level.SEVERE, null, ex);
+}
+      
+      
+    }//GEN-LAST:event_butInfoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -562,6 +597,7 @@ public class AddDeleteMachines extends javax.swing.JFrame {
     private javax.swing.JButton butBack;
     private javax.swing.JButton butDelete;
     private javax.swing.JButton butFirst;
+    private javax.swing.JButton butInfo;
     private javax.swing.JButton butLast;
     private javax.swing.JButton butNew;
     private javax.swing.JButton butNext;

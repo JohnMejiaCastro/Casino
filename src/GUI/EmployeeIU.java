@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import logic.DataDayReport;
 import logic.Machine;
 import GUI.AddDeleteMachines;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -61,6 +62,9 @@ public class EmployeeIU extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setTitle("EMPLOYEE");
         JacquiDate.setVisible(false);
+        butInfo.setOpaque(false);
+        butInfo.setContentAreaFilled(false);
+        butInfo.setBorderPainted(false);
         loadMachineCombo();
         selectMachine();
         this.newInterface();
@@ -70,6 +74,9 @@ public class EmployeeIU extends javax.swing.JFrame {
     public EmployeeIU(DBCasino dataFile) {
 
         initComponents();
+        butInfo.setOpaque(false);
+        butInfo.setContentAreaFilled(false);
+        butInfo.setBorderPainted(false);
         this.setLocationRelativeTo(null);
         this.setTitle("EMPLOYEE");
         this.dataFile = dataFile;
@@ -102,6 +109,7 @@ public class EmployeeIU extends javax.swing.JFrame {
         butNew = new javax.swing.JButton();
         JacquiDate = new com.toedter.calendar.JDateChooser();
         jcbNumberMachine = new javax.swing.JComboBox();
+        butInfo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -136,6 +144,7 @@ public class EmployeeIU extends javax.swing.JFrame {
         panDataEmployeeLayout.setVerticalGroup(
             panDataEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panDataEmployeeLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(panDataEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labPhoto)
                     .addComponent(butLogOut))
@@ -221,21 +230,34 @@ public class EmployeeIU extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        butInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pictures/info-16.png"))); // NOI18N
+        butInfo.setText("Help");
+        butInfo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        butInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butInfoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panDataReport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panDataEmployee, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(butInfo)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(panDataReport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panDataEmployee, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(butInfo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panDataEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panDataReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -269,6 +291,14 @@ public class EmployeeIU extends javax.swing.JFrame {
     private void jcbNumberMachineMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcbNumberMachineMouseClicked
 
     }//GEN-LAST:event_jcbNumberMachineMouseClicked
+
+    private void butInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butInfoActionPerformed
+        try {
+            Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + "C:\\Users\\johnleandro\\Documents\\NetBeansProjects\\fullCasino\\Casino\\src\\Docs\\Employee.pdf");
+        } catch (IOException ex) {
+            Logger.getLogger(EmployeeIU.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_butInfoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -307,6 +337,7 @@ public class EmployeeIU extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser JacquiDate;
+    private javax.swing.JButton butInfo;
     private javax.swing.JButton butLogOut;
     private javax.swing.JButton butNew;
     private javax.swing.JComboBox jcbNumberMachine;

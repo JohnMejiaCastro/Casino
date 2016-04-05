@@ -62,12 +62,18 @@ public class Reports extends javax.swing.JFrame {
     public Reports() {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.setTitle("REPORTS");
+        this.setTitle("REPORTS");       
+        butInfo.setOpaque(false);
+        butInfo.setContentAreaFilled(false);
+        butInfo.setBorderPainted(false);
         
     }
 
     public Reports(DBCasino dataFile) {
         initComponents();
+        butInfo.setOpaque(false);
+        butInfo.setContentAreaFilled(false);
+        butInfo.setBorderPainted(false);
         this.setLocationRelativeTo(null);
         this.setTitle("REPORTS");
         this.dataFile = dataFile;
@@ -93,6 +99,7 @@ public class Reports extends javax.swing.JFrame {
         panReportDay = new javax.swing.JPanel();
         jDateDay = new com.toedter.calendar.JDateChooser();
         butSearch1 = new javax.swing.JButton();
+        butInfo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -193,32 +200,45 @@ public class Reports extends javax.swing.JFrame {
                 .addGap(0, 8, Short.MAX_VALUE))
         );
 
+        butInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pictures/info-16.png"))); // NOI18N
+        butInfo.setText("Help");
+        butInfo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        butInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butInfoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(panDataUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(76, 76, 76)
-                                .addComponent(butBack, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(panReportDay, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panReportMonth, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(panReportMonth, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(butInfo)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addComponent(panDataUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(76, 76, 76)
+                                    .addComponent(butBack, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(5, 5, 5)
+                .addComponent(butInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panDataUsers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panReportDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -246,6 +266,15 @@ public class Reports extends javax.swing.JFrame {
     private void butSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butSearchActionPerformed
         this.selectReportDates();
     }//GEN-LAST:event_butSearchActionPerformed
+
+    private void butInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butInfoActionPerformed
+        try {
+            Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + "C:\\Users\\johnleandro\\Documents\\NetBeansProjects\\fullCasino\\Casino\\src\\Docs\\Reports.pdf");
+        } catch (IOException ex) {
+           java.util.logging.Logger.getLogger(Reports.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_butInfoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -288,6 +317,7 @@ public class Reports extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton butBack;
+    private javax.swing.JButton butInfo;
     private javax.swing.JButton butSearch;
     private javax.swing.JButton butSearch1;
     private com.toedter.calendar.JDateChooser jDateBefore;
